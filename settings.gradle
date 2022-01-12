@@ -1,0 +1,3 @@
+rootProject.name = 'bytecode-lab'
+include 'asm01'
+
