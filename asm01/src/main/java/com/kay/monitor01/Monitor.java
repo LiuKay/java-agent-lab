@@ -1,4 +1,4 @@
-package com.kay.monitor;
+package com.kay.monitor01;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -74,7 +74,7 @@ public class Monitor extends ClassLoader {
             mv.visitInsn(ICONST_1);
             mv.visitVarInsn(ILOAD, 2);
             mv.visitInsn(IASTORE);
-            mv.visitMethodInsn(INVOKESTATIC, "com/kay/monitor/MonitorLog", "info", "(Ljava/lang/String;[I)V", false);
+            mv.visitMethodInsn(INVOKESTATIC, "com/kay/monitor01/MonitorLog", "info", "(Ljava/lang/String;[I)V", false);
         }
     }
 
