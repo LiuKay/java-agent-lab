@@ -10,24 +10,8 @@ import org.objectweb.asm.commons.AdviceAdapter;
 import java.io.FileOutputStream;
 import java.lang.reflect.Method;
 
-/***
- * package com.kay;
- *
- * public class UserService {
- *     public UserService() {
- *     }
- *
- *     public String getUserInfo(String id) {
- *         long var2 = System.nanoTime(); // generate
- *
- *         System.out.println("get user info");
- *         System.out.println("get user info");
- *         System.out.println("get user info");
- *
- *         System.out.println("Method [getUserInfo] time cost:" + (System.nanoTime() - var2) + "(ns)"); // generate
- *         return id;
- *     }
- * }
+/**
+ * Record the method cost time.
  */
 public class TimeMonitor extends ClassLoader {
 

@@ -10,6 +10,9 @@ import org.objectweb.asm.commons.AdviceAdapter;
 import java.io.FileOutputStream;
 import java.lang.reflect.Method;
 
+/**
+ * Record the method args and result. (number specified)
+ */
 public class Monitor extends ClassLoader {
 
     public static void main(String[] args) throws Exception {
