@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+}
+
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+}
+
+jar {
+    archiveFileName = "${project.name}-${project.version}.jar"
+    manifest {
+        attributes(
+                'Premain-Class': 'com.kay.agent.HelloAgent',
+                'Can-Redefine-Classes': 'true',
+                'Implementation-Version': project.version
+        )
+    }
+}
