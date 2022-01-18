@@ -1,5 +1,5 @@
 rootProject.name = 'bytecode-lab'
-include 'asm01'
+include 'asm'
 include 'helloAgent'
 include 'agent01'
 
