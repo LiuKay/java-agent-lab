@@ -1,5 +1,6 @@
 package com.kay.monitor01;
 
+import com.kay.Utils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
@@ -7,7 +8,6 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.commons.AdviceAdapter;
 
-import java.io.FileOutputStream;
 import java.lang.reflect.Method;
 
 /**
@@ -23,7 +23,7 @@ public class Monitor extends ClassLoader {
         classReader.accept(classVisitor, ClassReader.EXPAND_FRAMES);
 
         final byte[] bytes = classWriter.toByteArray();
-        outputClazz(bytes);
+        Utils.outputClass(bytes, "MethodToBeMonitor");
 
         final Class<?> clazz = new Monitor().defineClass("com.kay.monitor01.MethodToBeMonitor", bytes, 0, bytes.length);
         final Method method = clazz.getMethod("sum", int.class, int.class);
@@ -78,16 +78,6 @@ public class Monitor extends ClassLoader {
             mv.visitVarInsn(ILOAD, 2);
             mv.visitInsn(IASTORE);
             mv.visitMethodInsn(INVOKESTATIC, "com/kay/monitor01/MonitorLog", "info", "(Ljava/lang/String;[I)V", false);
-        }
-    }
-
-    private static void outputClazz(byte[] bytes) {
-        final String path = Monitor.class.getResource("/").getPath() + "AsmMethodToBeMonitor.class";
-        try (FileOutputStream out = new FileOutputStream(path)) {
-            System.out.println("ASM output path:" + path);
-            out.write(bytes);
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

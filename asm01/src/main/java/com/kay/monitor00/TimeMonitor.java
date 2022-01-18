@@ -1,5 +1,6 @@
 package com.kay.monitor00;
 
+import com.kay.Utils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
@@ -34,7 +35,7 @@ public class TimeMonitor extends ClassLoader {
         classReader.accept(classVisitor, ClassReader.EXPAND_FRAMES);
 
         final byte[] bytes = classWriter.toByteArray();
-        outputClazz(bytes);
+        Utils.outputClass(bytes, "UserService");
 
         final Class<?> clazz = new TimeMonitor().defineClass("com.kay.monitor00.UserService", bytes, 0, bytes.length);
         final Method getUserInfo = clazz.getMethod("getUserInfo", String.class);

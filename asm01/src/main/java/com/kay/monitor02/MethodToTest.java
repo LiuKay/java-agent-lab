@@ -1,5 +1,6 @@
 package com.kay.monitor02;
 
+import com.kay.Utils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
@@ -9,7 +10,6 @@ import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.commons.AdviceAdapter;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -40,7 +40,7 @@ public class MethodToTest extends ClassLoader{
             InstantiationException, IllegalAccessException {
         final byte[] bytes = new MethodToTest().getBytes(MethodToTest.class.getName());
 
-        outputClazz(bytes);
+        Utils.outputClass(bytes, "MethodToTest");
 
         final Class<?> clazz = new MethodToTest().defineClass("com.kay.monitor02.MethodToTest", bytes, 0,
                                                                bytes.length);
@@ -166,16 +166,4 @@ public class MethodToTest extends ClassLoader{
     public static void record(String methodName, Object response) {
         System.out.println("Monitor : [name:" + methodName + " output:" + response + "]\r\n");
     }
-
-
-    private static void outputClazz(byte[] bytes) {
-        final String path = MethodToTest.class.getResource("/").getPath() + "AsmMethodToTest.class";
-        try (FileOutputStream out = new FileOutputStream(path)) {
-            System.out.println("ASM output path:" + path);
-            out.write(bytes);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
 }

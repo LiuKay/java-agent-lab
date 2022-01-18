@@ -4,8 +4,6 @@ import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.lang.reflect.Method;
 
 /**
@@ -24,7 +22,7 @@ public class TwoSum extends ClassLoader{
 
     public static void main(String[] args) throws Exception {
         final byte[] bytes = generate();
-        outputClazz(bytes);
+        Utils.outputClass(bytes, "AsmTwoSum");
 
         final Class<?> clazz = new TwoSum().defineClass("com.kay.AsmTwoSum", bytes, 0, bytes.length);
 
@@ -71,12 +69,4 @@ public class TwoSum extends ClassLoader{
         return classWriter.toByteArray();
     }
 
-    private static void outputClazz(byte[] bytes){
-        try (FileOutputStream out = new FileOutputStream("AsmTowSum.class")) {
-            System.out.println("ASM output path:" + (new File("")).getAbsolutePath());
-            out.write(bytes);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
