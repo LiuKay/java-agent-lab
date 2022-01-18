@@ -25,7 +25,7 @@ public class Monitor extends ClassLoader {
         final byte[] bytes = classWriter.toByteArray();
         outputClazz(bytes);
 
-        final Class<?> clazz = new Monitor().defineClass("com.kay.monitor.MethodToBeMonitor", bytes, 0, bytes.length);
+        final Class<?> clazz = new Monitor().defineClass("com.kay.monitor01.MethodToBeMonitor", bytes, 0, bytes.length);
         final Method method = clazz.getMethod("sum", int.class, int.class);
         final Object result = method.invoke(clazz.getDeclaredConstructor().newInstance(), 1, 2);
 

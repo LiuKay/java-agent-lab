@@ -35,22 +35,23 @@ public class HelloWorld extends ClassLoader{
     private static byte[] generate(){
         ClassWriter classWriter = new ClassWriter(0);
 
-        //<init>
+        //class header
+        classWriter.visit(Opcodes.V11, Opcodes.ACC_PUBLIC, "com/kay/AsmHello", null, "java/lang/Object", null);
+
+        //create method : <init>
         {
-            classWriter.visit(Opcodes.V11, Opcodes.ACC_PUBLIC, "com/kay/AsmHello", null, "java/lang/Object", null);
             MethodVisitor methodVisitor = classWriter.visitMethod(Opcodes.ACC_PUBLIC, "<init>", "()V", null, null);
             methodVisitor.visitVarInsn(Opcodes.ALOAD, 0);
             methodVisitor.visitMethodInsn(Opcodes.INVOKESPECIAL, "java/lang/Object", "<init>", "()V", false);
             methodVisitor.visitInsn(Opcodes.RETURN);
             methodVisitor.visitMaxs(1, 1);
-            methodVisitor.visitEnd();
+            methodVisitor.visitEnd(); //method end
         }
 
-        //main
+        //create method: main
         {
             MethodVisitor methodVisitor = classWriter.visitMethod(Opcodes.ACC_PUBLIC | Opcodes.ACC_STATIC, "main",
                                                                   "([Ljava/lang/String;)V", null, null);
-
             methodVisitor.visitFieldInsn(Opcodes.GETSTATIC,"java/lang/System","out","Ljava/io/PrintStream;");
 
             methodVisitor.visitLdcInsn("Hello World ASM!");
@@ -60,7 +61,7 @@ public class HelloWorld extends ClassLoader{
 
             methodVisitor.visitInsn(Opcodes.RETURN);
             methodVisitor.visitMaxs(2, 1);
-            methodVisitor.visitEnd();
+            methodVisitor.visitEnd(); //method end
         }
         classWriter.visitEnd();
 

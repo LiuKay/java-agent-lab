@@ -8,6 +8,18 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.lang.reflect.Method;
 
+/**
+ * package com.kay;
+ *
+ * public class AsmTwoSum {
+ *     public AsmTwoSum() {
+ *     }
+ *
+ *     public int sum(int var1, int var2) {
+ *         return var1 + var2;
+ *     }
+ * }
+ */
 public class TwoSum extends ClassLoader{
 
     public static void main(String[] args) throws Exception {

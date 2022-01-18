@@ -36,7 +36,7 @@ public class TimeMonitor extends ClassLoader {
         final byte[] bytes = classWriter.toByteArray();
         outputClazz(bytes);
 
-        final Class<?> clazz = new TimeMonitor().defineClass("com.kay.timemonitor.UserService", bytes, 0, bytes.length);
+        final Class<?> clazz = new TimeMonitor().defineClass("com.kay.monitor00.UserService", bytes, 0, bytes.length);
         final Method getUserInfo = clazz.getMethod("getUserInfo", String.class);
         final Object result = getUserInfo.invoke(clazz.getDeclaredConstructor().newInstance(), "10086");
 
