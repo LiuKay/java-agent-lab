@@ -24,6 +24,7 @@ ASM 是基于访问者模式实现，提供了2种 API来操作 class：
 - ClassWriter: 用于编辑 class 或者生成新的字节码
 - 各种 Visitor用于访问不同的数据：MethodVisitor，FieldVisitor，AnnotationVisitor等等
 
+### Core API
 用 ClassWriter 生成一个 `HelloWrold`类：
 ```java
 public class HelloWorld extends ClassLoader{
@@ -42,7 +43,7 @@ public class HelloWorld extends ClassLoader{
         ClassWriter classWriter = new ClassWriter(0);
 
         //class header
-        classWriter.visit(Opcodes.V11, Opcodes.ACC_PUBLIC, "com/kay/AsmHello", null, "java/lang/Object", null);
+        classWriter.visit(Opcodes.V1_8, Opcodes.ACC_PUBLIC, "com/kay/AsmHello", null, "java/lang/Object", null);
 
         //create method : <init>
         {
@@ -74,5 +75,61 @@ public class HelloWorld extends ClassLoader{
         return classWriter.toByteArray();
     }
 
+}
+```
+运行以上代码将会生成一个如下的类：
+```java
+package com.kay;
+public class AsmHello {
+    public AsmHello() {
+    }
+
+    public static void main(String[] var0) {
+        System.out.println("Hello World ASM!");
+    }
+}
+```
+
+### Tree API
+Tree API 用来操作 Class 的类是 ClassNode, 生一个 `HelloWorld` class 的代码如下：
+```java
+public class TreeApiHelloWorld {
+
+    public static void main(String[] args) {
+        ClassNode classNode = new ClassNode();
+        classNode.name = "com/kay/AsmTreeHelloWorld";
+        classNode.version = V1_8;
+        classNode.access = ACC_PUBLIC;
+        classNode.superName = "java/lang/Object";
+
+        //<init>
+        final MethodNode mn = new MethodNode(ACC_PUBLIC, "<init>", "()V", null, null);
+        final InsnList insnList = mn.instructions;
+        insnList.add(new VarInsnNode(ALOAD, 0));
+        insnList.add(new MethodInsnNode(INVOKESPECIAL, "java/lang/Object", "<init>", "()V", false));
+        insnList.add(new InsnNode(RETURN));
+        mn.maxLocals = 1;
+        mn.maxStack = 1;
+        classNode.methods.add(mn);
+
+        //main
+        final MethodNode methodNode = new MethodNode(ACC_PUBLIC + ACC_STATIC, "main", "([Ljava/lang/String;)V", null,
+                                                     null);
+        final InsnList instructions = methodNode.instructions;
+
+        instructions.add(new FieldInsnNode(GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStrem"));
+        instructions.add(new LdcInsnNode("Hello World ASM!"));
+        instructions.add(
+                new MethodInsnNode(INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V", false));
+        instructions.add(new InsnNode(RETURN));
+        methodNode.maxStack = 2;
+        methodNode.maxLocals = 1;
+        classNode.methods.add(methodNode);
+
+        final ClassWriter classWriter = new ClassWriter(0);
+        classNode.accept(classWriter);
+
+        Utils.outputClass(classWriter.toByteArray(), "AsmTreeHelloWorld");
+    }
 }
 ```

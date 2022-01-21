@@ -3,14 +3,11 @@ package com.kay.tree;
 import com.kay.Utils;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.tree.ClassNode;
-import org.objectweb.asm.tree.FieldNode;
 import org.objectweb.asm.tree.MethodNode;
 
 import static org.objectweb.asm.Opcodes.ACC_ABSTRACT;
-import static org.objectweb.asm.Opcodes.ACC_FINAL;
 import static org.objectweb.asm.Opcodes.ACC_INTERFACE;
 import static org.objectweb.asm.Opcodes.ACC_PUBLIC;
-import static org.objectweb.asm.Opcodes.ACC_STATIC;
 import static org.objectweb.asm.Opcodes.V11;
 
 /**
@@ -26,12 +23,6 @@ public class TreeApiDemo {
         classNode.access = ACC_PUBLIC + ACC_ABSTRACT + ACC_INTERFACE;
         classNode.name = "com/kay/Comparable";
         classNode.superName = "java/lang/Object";
-        classNode.fields.add(new FieldNode(ACC_PUBLIC + ACC_FINAL + ACC_STATIC,
-                                    "LESS", "I", null, Integer.valueOf(-1)));
-        classNode.fields.add(new FieldNode(ACC_PUBLIC + ACC_FINAL + ACC_STATIC,
-                                    "EQUAL", "I", null, Integer.valueOf(0)));
-        classNode.fields.add(new FieldNode(ACC_PUBLIC + ACC_FINAL + ACC_STATIC,
-                                    "GREATER", "I", null, Integer.valueOf(1)));
         classNode.methods.add(new MethodNode(ACC_PUBLIC + ACC_ABSTRACT,
                                       "compareTo", "(Ljava/lang/Object;)I", null, null));
 
@@ -39,6 +30,7 @@ public class TreeApiDemo {
         final ClassWriter writer = new ClassWriter(0);
         classNode.accept(writer);
 
+        //output the bytes into a .class file
         Utils.outputClass(writer.toByteArray(), "Comparable");
     }
 }

@@ -41,7 +41,7 @@ public class TwoSum extends ClassLoader{
 
         {
             //header of class
-            classWriter.visit(Opcodes.V11, Opcodes.ACC_PUBLIC, "com/kay/AsmTwoSum", null, "java/lang/Object",
+            classWriter.visit(Opcodes.V1_8, Opcodes.ACC_PUBLIC, "com/kay/AsmTwoSum", null, "java/lang/Object",
                               null);
 
             //empty constructor

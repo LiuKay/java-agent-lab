@@ -34,7 +34,7 @@ public class HelloWorld extends ClassLoader{
         ClassWriter classWriter = new ClassWriter(0);
 
         //class header
-        classWriter.visit(Opcodes.V11, Opcodes.ACC_PUBLIC, "com/kay/AsmHello", null, "java/lang/Object", null);
+        classWriter.visit(Opcodes.V1_8, Opcodes.ACC_PUBLIC, "com/kay/AsmHello", null, "java/lang/Object", null);
 
         //create method : <init>
         {
