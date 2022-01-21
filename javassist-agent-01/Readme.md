@@ -15,7 +15,7 @@
 2. 第二种方式是通过 VirtualMachine.loadAgent() 的方式在 JVM 运行的过程种去加载 agent，此时会执行 agentmain 方法，在 JVM 运行的过程种动态的来增强类
 
 
-### JVM启动记载 Agent
+### JVM启动加载 Agent
 
 1. 在 TargetClass 启动时，添加 VM 参数 -javaagent:agent.jar 即可
 
