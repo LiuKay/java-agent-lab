@@ -2,4 +2,5 @@ rootProject.name = 'bytecode-lab'
 include 'asm'
 include 'javassist-agent-01'
 include 'javassist'
+include 'bytebuddy'
 
