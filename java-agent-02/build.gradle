@@ -10,10 +10,14 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 }
 
-test {
-    useJUnitPlatform()
+jar {
+    archiveFileName = "${project.name}-${project.version}.jar"
+    manifest {
+        attributes(
+                'Premain-Class': 'com.kay.JVMMonitor',
+                'Implementation-Version': project.version
+        )
+    }
 }
