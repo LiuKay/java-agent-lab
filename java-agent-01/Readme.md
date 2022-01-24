@@ -25,3 +25,7 @@
 2. 运行 TargetClass main 方法，此时运行的是还未被替换的方法
 3. 将 Attach main 里面的pid 替换成 TargetClass 输出的 pid，agent 路径替换成打包好的路径，运行 main 方法
 4. 热部署成功，TargetClass 现在运行的是已替换后的方法
+
+### Debug 
+
+参考 [Debug Agent](../README.md)
