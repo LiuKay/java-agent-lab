@@ -1,0 +1,34 @@
+plugins {
+    id 'java'
+}
+
+group 'com.kay'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'net.bytebuddy:byte-buddy:1.12.7'
+    implementation 'net.bytebuddy:byte-buddy-agent:1.12.7'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jar {
+    archiveFileName = "${project.name}-${project.version}.jar"
+    manifest {
+        attributes(
+                'Can-Redefine-Classes': 'true',
+                'Implementation-Version': project.version,
+                'Can-Retransform-Classes': 'true',
+                'Premain-Class': 'com.kay.agent.monitor.agent.AgentMain'
+        )
+    }
+}

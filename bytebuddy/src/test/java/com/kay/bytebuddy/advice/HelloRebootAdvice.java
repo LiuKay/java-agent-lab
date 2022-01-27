@@ -1,4 +1,4 @@
-package com.kay.bytebuddy;
+package com.kay.bytebuddy.advice;
 
 import net.bytebuddy.asm.Advice;
 
@@ -22,14 +22,17 @@ public class HelloRebootAdvice {
         System.out.println("Origin :" + origin);
         System.out.println("Detailed Origin :" + detailedOriginal);
 
-        nameField = "Kay";
+        nameField = "Kay"; //change the filed value
         return System.nanoTime();
     }
 
     @Advice.OnMethodExit
-    public static void exit(@Advice.Enter long time){
+    public static void exit(@Advice.Enter long time,
+                            @Advice.Return String ret){
         System.out.println(">>exit method");
         System.out.println("Method execution time: " + (System.nanoTime()-time) + "ns");
+
+        System.out.println("The return value is:" + ret);
     }
 
 }

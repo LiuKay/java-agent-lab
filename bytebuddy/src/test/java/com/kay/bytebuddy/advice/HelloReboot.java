@@ -1,4 +1,4 @@
-package com.kay.bytebuddy;
+package com.kay.bytebuddy.advice;
 
 public class HelloReboot {
 
