@@ -15,4 +15,14 @@ repositories {
 
 dependencies {
     implementation 'net.bytebuddy:byte-buddy:1.12.7'
+    implementation 'net.bytebuddy:byte-buddy-agent:1.12.7'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+
+    testImplementation("org.assertj:assertj-core:3.22.0")
+}
+
+test {
+    useJUnitPlatform()
 }
