@@ -8,6 +8,8 @@ import net.bytebuddy.dynamic.loading.ClassLoadingStrategy;
 import net.bytebuddy.dynamic.loading.ClassReloadingStrategy;
 import net.bytebuddy.implementation.MethodDelegation;
 import net.bytebuddy.matcher.ElementMatchers;
+
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -53,7 +55,7 @@ class ByteBuddyTest {
                 .load(getClass().getClassLoader(), ClassLoadingStrategy.Default.WRAPPER)
                 .getLoaded();
 
-        final Method method = loaded.getDeclaredMethod("custom", null);
+        final Method method = loaded.getDeclaredMethod("custom");
 
         assertThat(method.invoke(loaded.newInstance())).isEqualTo(Bar.bar());
         assertThat(loaded.getDeclaredField("x")).isNotNull();
@@ -66,11 +68,28 @@ class ByteBuddyTest {
         new ByteBuddy()
                 .redefine(Foo.class)
                 .method(named("foo"))
-                .intercept(Advice.to(UserServiceAdvice.class))
+                .intercept(MethodDelegation.to(Bar.class))
                 .make()
                 .load(Foo.class.getClassLoader(), ClassReloadingStrategy.fromInstalledAgent());
 
         Foo foo = new Foo();
-        System.out.println(foo.foo());
+        assertThat(foo.foo()).isEqualTo(Bar.bar());
+    }
+
+    @Test
+    void visitMethod() throws Exception{
+        Class<?> loaded = new ByteBuddy()
+                .redefine(HelloReboot.class)
+                .visit(Advice.to(HelloRebootAdvice.class).on(ElementMatchers.isMethod()))
+                .make()
+                //should use bootstrap loader
+                .load(ClassLoadingStrategy.BOOTSTRAP_LOADER, ClassLoadingStrategy.Default.WRAPPER)
+                .getLoaded();
+
+        Object instance = loaded.newInstance();
+        System.out.println(instance.getClass().getClassLoader());
+        Method method = loaded.getDeclaredMethod("sayHello", String.class);
+        Object ret = method.invoke(instance, "kaybee");
+        System.out.println(ret);
     }
 }
