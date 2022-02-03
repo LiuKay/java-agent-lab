@@ -1,6 +1,6 @@
-# bytecode-lab
+# bytecode-instrument-lab
 
-JVM bytecode learning 
+JVM bytecode instrument learning 
 
 ### ASM
 
