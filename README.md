@@ -54,6 +54,7 @@ java -javaagent:myagent.jar=agentArgs -jar myapp.jar
 
 ### Debug Agent
 
+#### 1 Remote Debug
 Java Agent 实际上与用户应用程序运行在同一个 JVM 实例中，所以同样可以通过 Remote Debug 的方式来进行 Debug。
 首先在应用程序运行的时候打开 remote debug 的监听端口：（IDE 中运行的时候就在 main 方法添加相应的 VM 参数就 OK 了）
 ```shell
@@ -63,3 +64,7 @@ java -agentlib:jdwp=transport=dt_socket,address=5005,server=y,suspend=n \
 ```
 然后在 Agent 的代码中去运行 Remote Debug 连到运行的程序中，就可以进行 debug agent 了。
 （在 IDEA 中的话就是直接新建一个 Run Configuration 选择 Remote JVM debug 就可以了）
+
+#### 2 IDE Debug
+
+在 IDE 中将 Java Agent 的代码放到项目的依赖项里面，打好断点，启动项目可以直接进行 Debug， IDE 能够智能的找到 Agent 的代码并在断点处停住
