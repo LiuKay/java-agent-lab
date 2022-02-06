@@ -8,7 +8,7 @@ JVM bytecode instrument learning
 
 ### Javassist
 
-[入门的一个 javassist agent demo](./javassist-agent-01/Readme.md)
+[入门的一个 javassist agent demo](./java-agent-01/Readme.md)
 
 ### Byte-buddy
 
