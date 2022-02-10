@@ -5,6 +5,7 @@ include 'bytebuddy'
 include 'java-agent-01'
 include 'java-agent-02'
 include 'java-agent-03'
+include 'java-agent-04'
 include 'bytebuddy-agent-01'
 include 'bytebuddy-agent-02'
 

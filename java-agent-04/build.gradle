@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+}
+
+group 'com.kay'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+
+ext {
+    set("prometheusVersion", "0.10.0")
+}
+
+dependencies {
+    implementation "io.prometheus:simpleclient_httpserver:${prometheusVersion}"
+    implementation "io.prometheus:simpleclient_common:${prometheusVersion}"
+    implementation "io.prometheus:simpleclient_hotspot:${prometheusVersion}"
+}
+
+jar {
+    archiveFileName = "${project.name}.jar"
+    manifest {
+        attributes(
+                'Premain-Class': 'com.kay.Main',
+                'Implementation-Version': project.version
+        )
+    }
+}
