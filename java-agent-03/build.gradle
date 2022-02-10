@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+}
+
+group 'com.kay'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+}
+
+jar {
+    archiveFileName = "${project.name}-${project.version}.jar"
+    manifest {
+        attributes(
+                'Premain-Class': 'com.kay.Main',
+                'Implementation-Version': project.version
+        )
+    }
+}
