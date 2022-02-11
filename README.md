@@ -15,6 +15,11 @@ JVM bytecode instrument learning
 
 ## Java Agent 
 
+### Demos
+- [monitor jvm thread status](./java-agent-02/Readme.md)
+- [monitor jvm metrics](./java-agent-03/Readme.md)
+- [export jvm metrics to prometheus](./java-agent-04/Readme.md)
+
 ### Agent Basics
 
 Instrument API: [java.lang.instrument (Java 2 Platform SE 5.0) (oracle.com)](https://docs.oracle.com/javase/1.5.0/docs/api/java/lang/instrument/package-summary.html)

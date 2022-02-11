@@ -10,4 +10,7 @@ public class Main {
         JvmMemoryMonitor.start();
     }
 
+    public static void main(String[] args) {
+        JvmMemoryMonitor.start();
+    }
 }

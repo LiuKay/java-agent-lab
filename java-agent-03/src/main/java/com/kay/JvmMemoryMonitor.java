@@ -1,5 +1,7 @@
 package com.kay;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -15,7 +17,13 @@ public class JvmMemoryMonitor {
     static class MetricJob implements Runnable {
         @Override
         public void run() {
-            new JvmMemoryMetricsCollector().collect();
+            System.err.println(LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+
+            new MemoryMetrics().collect();
+            new ThreadMetrics().collect();
+            new JvmVersionInfo().collect();
+            new ClassLoadingMetrics().collect();
+            new JvmGCMetrics().collect();
         }
 
     }
