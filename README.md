@@ -14,6 +14,9 @@ JVM bytecode instrument learning
 
 ### Byte-buddy
 
+Java Agent using Byte-Buddy Demos:
+- [Monitor method excution time demo](./bytebuddy-agent-01/Readme.md)
+- [Check permissions for method invokcation demo](./bytebuddy-agent-02)
 
 ## Java Agent 
 
@@ -21,6 +24,7 @@ JVM bytecode instrument learning
 - [monitor jvm thread status](./java-agent-02/Readme.md)
 - [monitor jvm metrics](./java-agent-03/Readme.md)
 - [export jvm metrics to prometheus](./java-agent-04/Readme.md)
+- [resolve dependency conflicts when using Java Agent](./dependency-demo/Readme.md)
 
 ### Agent Basics
 
