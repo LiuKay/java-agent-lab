@@ -2,6 +2,8 @@
 
 JVM bytecode instrument learning 
 
+[TOC]
+
 ### ASM
 
 [ASM 学习参考](./docs/asm.md)
@@ -73,3 +75,13 @@ java -agentlib:jdwp=transport=dt_socket,address=5005,server=y,suspend=n \
 #### 2 IDE Debug
 
 在 IDE 中将 Java Agent 的代码放到项目的依赖项里面，打好断点，启动项目可以直接进行 Debug， IDE 能够智能的找到 Agent 的代码并在断点处停住
+
+
+Notes:
+
+VM 添加参数 -XX:+TraceClassLoading 打印 class 从哪个路径加载的
+
+
+### Problems in Developing Java Agent
+
+1. [Dependencies conflicts](./dependency-demo/Readme.md)

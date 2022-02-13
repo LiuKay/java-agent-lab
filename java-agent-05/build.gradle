@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+}
+
+group 'com.kay'
+version '1.0'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    implementation "com.kay:dependency-demo:2.0"
+    implementation 'org.springframework.boot:spring-boot-loader:2.3.8.RELEASE'
+}
+
+jar {
+    archiveFileName = "${project.name}.jar"
+    manifest {
+        attributes(
+                'Bootstrap-Class': 'com.kay.example.Bootstrap',
+                'Premain-Class': 'com.kay.example.Main',
+                'Implementation-Version': project.version
+        )
+    }
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}

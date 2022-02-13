@@ -1,0 +1,18 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+group 'com.kay'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'com.kay'
+            artifactId = 'dependency-demo'
+            version = '1.0'
+
+            from components.java
+        }
+    }
+}
