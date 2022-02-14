@@ -1,6 +1,6 @@
-# bytecode-instrument-lab
+# Java Agent Lab
 
-JVM bytecode instrument learning 
+Things you need to know about the Java Agent. 
 
 [TOC]
 
